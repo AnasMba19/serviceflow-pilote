@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politique de confidentialité – ServiceFlow Pilote</title>
+<meta name="description" content="Politique de confidentialité du pilote ServiceFlow : gestion de commandes et de demandes de service par WhatsApp.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://anasmba19.github.io/serviceflow-pilote/">
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --text: #1d2330; --muted: #5b6475;
+    --border: #e1e5ec; --accent: #0f766e; --accent-soft: #e6f4f2;
+    --warn-bg: #fff8e6; --warn-border: #f0d48a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #11151c; --surface: #181d26; --text: #e6e9ef; --muted: #a2abbb;
+      --border: #2a3140; --accent: #4fd1c5; --accent-soft: #15302e;
+      --warn-bg: #2b2414; --warn-border: #6b5622;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 18px 0 6px; font-weight: 600; color: var(--accent); }
+  .brand svg { flex: none; }
+  h1 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.2; margin: 6px 0 8px; }
+  .meta { color: var(--muted); font-size: .95rem; padding-bottom: 20px; margin: 0; }
+  main { padding: 24px 0 48px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .note { background: var(--warn-bg); border-color: var(--warn-border); }
+  h2 { font-size: 1.2rem; margin: 0 0 10px; scroll-margin-top: 16px; }
+  h3 { font-size: 1rem; margin: 16px 0 6px; }
+  p { margin: 0 0 10px; }
+  ul { margin: 0 0 10px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  a { color: var(--accent); overflow-wrap: anywhere; }
+  nav.toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  @media (max-width: 600px) { nav.toc ol { columns: 1; } .card { padding: 16px; } }
+  .table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .table th, .table td { text-align: left; vertical-align: top; padding: 8px 10px; border-top: 1px solid var(--border); }
+  .table th { background: var(--accent-soft); }
+  @media (max-width: 600px) {
+    .table, .table tbody, .table tr, .table td { display: block; width: 100%; }
+    .table thead { display: none; }
+    .table tr { border-top: 1px solid var(--border); padding: 8px 0; }
+    .table td { border: 0; padding: 2px 0; }
+    .table td::before { content: attr(data-label) " : "; font-weight: 600; }
+  }
+  footer { color: var(--muted); font-size: .9rem; border-top: 1px solid var(--border); padding: 20px 0 32px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-2.8.8.8-2.7-.2-.3A8 8 0 0 1 12 4Zm-3.2 4.2-1.1 1.1 4.1 4.1 1.1-1.1Zm3 0v1.6h4.4V8.2Zm0 3v1.6h4.4v-1.6Z"/></svg>
+      ServiceFlow Pilote
+    </div>
+    <h1>Politique de confidentialité</h1>
+    <p class="meta">Version 1.0 — en vigueur depuis le 19 octobre 2026</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card note" aria-label="Statut du service">
+    <p><strong>Service en phase pilote.</strong> ServiceFlow Pilote est une démonstration de gestion de commandes et de demandes de service par WhatsApp. Il n'est pas un service commercial ouvert au public et n'est utilisé qu'avec un nombre restreint de participants informés.</p>
+    <p>Merci de <strong>ne transmettre aucune donnée sensible</strong> (santé, opinions, données bancaires, numéro de sécurité sociale, etc.) via ce service.</p>
+  </section>
+
+  <nav class="card toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#responsable">Responsable du traitement</a></li>
+      <li><a href="#donnees">Données traitées</a></li>
+      <li><a href="#finalites">Finalités et bases légales</a></li>
+      <li><a href="#destinataires">Prestataires et destinataires</a></li>
+      <li><a href="#transferts">Transferts hors de l'UE</a></li>
+      <li><a href="#conservation">Durée de conservation</a></li>
+      <li><a href="#droits">Vos droits</a></li>
+      <li><a href="#suppression">Suppression de vos données</a></li>
+      <li><a href="#securite">Sécurité</a></li>
+      <li><a href="#site">Cette page web</a></li>
+      <li><a href="#modifications">Modifications</a></li>
+    </ol>
+  </nav>
+
+  <section class="card" id="responsable">
+    <h2>1. Responsable du traitement</h2>
+    <p>Le responsable du traitement est <strong>Anas Mbarki</strong>, porteur du projet ServiceFlow Pilote, agissant à titre individuel dans le cadre de ce pilote de démonstration.</p>
+    <p>Contact pour toute question relative à vos données : <a href="mailto:anasmbarki.amk@gmail.com?subject=ServiceFlow%20Pilote%20-%20Donn%C3%A9es%20personnelles">anasmbarki.amk@gmail.com</a></p>
+    <p>Aucun délégué à la protection des données (DPO) n'a été désigné, cette désignation n'étant pas obligatoire au regard de la nature et de l'échelle du pilote.</p>
+  </section>
+
+  <section class="card" id="donnees">
+    <h2>2. Données traitées</h2>
+    <p>Lorsque vous échangez avec le numéro WhatsApp du pilote, les données suivantes peuvent être traitées :</p>
+    <ul>
+      <li><strong>Identification WhatsApp</strong> : numéro de téléphone et nom de profil WhatsApp ;</li>
+      <li><strong>Contenu des échanges</strong> : texte de vos messages et, le cas échéant, fichiers ou médias que vous choisissez d'envoyer ;</li>
+      <li><strong>Données de la demande</strong> : objet de la commande ou de la demande de service, informations que vous fournissez pour la traiter, statut et suivi de la demande ;</li>
+      <li><strong>Données techniques</strong> : identifiants et horodatage des messages, statuts de remise et de lecture fournis par WhatsApp.</li>
+    </ul>
+    <p>Ces données proviennent directement de vous, via WhatsApp. Le pilote ne procède à aucune prise de décision automatisée produisant des effets juridiques à votre égard, ni à aucun profilage publicitaire.</p>
+  </section>
+
+  <section class="card" id="finalites">
+    <h2>3. Finalités et bases légales</h2>
+    <table class="table">
+      <thead><tr><th scope="col">Finalité</th><th scope="col">Base légale (art. 6 RGPD)</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Finalité">Recevoir, enregistrer et traiter vos commandes et demandes de service, et vous répondre</td><td data-label="Base légale">Mesures précontractuelles ou exécution du service demandé (art. 6.1.b)</td></tr>
+        <tr><td data-label="Finalité">Suivre l'état de vos demandes et vous informer de leur avancement</td><td data-label="Base légale">Exécution du service demandé (art. 6.1.b)</td></tr>
+        <tr><td data-label="Finalité">Évaluer et améliorer le fonctionnement du pilote (tests, correction d'erreurs)</td><td data-label="Base légale">Intérêt légitime du responsable à éprouver le service (art. 6.1.f)</td></tr>
+        <tr><td data-label="Finalité">Répondre à vos demandes d'exercice de droits</td><td data-label="Base légale">Obligation légale (art. 6.1.c)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px">Vos données ne sont ni vendues, ni louées, ni utilisées à des fins publicitaires.</p>
+  </section>
+
+  <section class="card" id="destinataires">
+    <h2>4. Prestataires et destinataires</h2>
+    <p>Les données sont accessibles au seul responsable du traitement. Le pilote s'appuie sur les prestataires techniques suivants, qui traitent les données pour son compte ou dans le cadre de leurs propres conditions :</p>
+    <ul>
+      <li><strong>Meta (WhatsApp Business Cloud API)</strong> — acheminement des messages WhatsApp. Le traitement de vos données par WhatsApp lui-même est régi par la <a href="https://www.whatsapp.com/legal/privacy-policy-eea" rel="noopener">politique de confidentialité de WhatsApp</a>.</li>
+      <li><strong>Make</strong> (Celonis) — automatisation transmettant les messages reçus vers la base de données et déclenchant les réponses. <a href="https://www.make.com/en/privacy-notice" rel="noopener">Politique de confidentialité de Make</a>.</li>
+      <li><strong>Supabase</strong> — hébergement de la base de données des demandes. <a href="https://supabase.com/privacy" rel="noopener">Politique de confidentialité de Supabase</a>.</li>
+    </ul>
+    <p>Les données ne sont communiquées à aucun autre tiers, sauf obligation légale ou réquisition d'une autorité compétente.</p>
+  </section>
+
+  <section class="card" id="transferts">
+    <h2>5. Transferts hors de l'Union européenne</h2>
+    <p>Certains prestataires cités ci-dessus, ou leurs sous-traitants, peuvent traiter des données en dehors de l'Espace économique européen, notamment aux États-Unis. Ces transferts sont encadrés par les garanties prévues par le RGPD que ces prestataires mettent en œuvre (décision d'adéquation telle que le cadre de protection des données UE–États-Unis, ou clauses contractuelles types de la Commission européenne). Vous pouvez obtenir des informations sur ces garanties en écrivant à l'adresse de contact ci-dessus.</p>
+  </section>
+
+  <section class="card" id="conservation">
+    <h2>6. Durée de conservation</h2>
+    <p>Les données ne sont conservées que pendant la durée nécessaire aux finalités décrites ci-dessus, dans le cadre limité du pilote. Les durées précises de conservation par catégorie de données sont en cours de définition et seront indiquées sur cette page dès leur fixation.</p>
+    <p>Dans l'attente, vous pouvez à tout moment demander la suppression de vos données selon la procédure décrite à la <a href="#suppression">section 8</a>. Les données conservées par WhatsApp/Meta, Make ou Supabase pour leurs propres besoins relèvent de leurs politiques respectives.</p>
+  </section>
+
+  <section class="card" id="droits">
+    <h2>7. Vos droits</h2>
+    <p>Conformément au Règlement général sur la protection des données (RGPD) et à la loi « Informatique et Libertés », vous disposez des droits suivants :</p>
+    <ul>
+      <li>droit d'accès, de rectification et d'effacement de vos données ;</li>
+      <li>droit à la limitation du traitement et droit d'opposition, notamment au traitement fondé sur l'intérêt légitime ;</li>
+      <li>droit à la portabilité des données que vous avez fournies ;</li>
+      <li>droit de définir des directives relatives au sort de vos données après votre décès.</li>
+    </ul>
+    <p>Pour exercer ces droits, écrivez à <a href="mailto:anasmbarki.amk@gmail.com?subject=ServiceFlow%20Pilote%20-%20Exercice%20de%20droits">anasmbarki.amk@gmail.com</a>. Une réponse vous sera apportée dans un délai d'un mois à compter de la réception de la demande, délai prolongeable dans les conditions prévues par l'article 12 du RGPD. Un justificatif d'identité peut être demandé en cas de doute raisonnable.</p>
+    <p>Vous pouvez également introduire une réclamation auprès de la Commission nationale de l'informatique et des libertés (CNIL) : <a href="https://www.cnil.fr/fr/plaintes" rel="noopener">www.cnil.fr/fr/plaintes</a>.</p>
+  </section>
+
+  <section class="card" id="suppression">
+    <h2>8. Suppression de vos données</h2>
+    <p>Vous pouvez demander la suppression de l'ensemble des données vous concernant traitées par ServiceFlow Pilote :</p>
+    <ol>
+      <li><strong>Par WhatsApp</strong> : envoyez le message <strong>« SUPPRIMER MES DONNÉES »</strong> au numéro WhatsApp du pilote ; ou</li>
+      <li><strong>Par e-mail</strong> : écrivez à <a href="mailto:anasmbarki.amk@gmail.com?subject=ServiceFlow%20Pilote%20-%20Suppression%20de%20mes%20donn%C3%A9es">anasmbarki.amk@gmail.com</a> avec l'objet « Suppression de mes données », en indiquant le numéro de téléphone WhatsApp utilisé.</li>
+    </ol>
+    <p>Les données vous concernant enregistrées dans la base du pilote sont alors effacées, et une confirmation vous est adressée, dans un délai maximal d'un mois. Les données qui doivent être conservées pour répondre à une obligation légale sont exclues de cette suppression ; vous en êtes alors informé.</p>
+    <p>La suppression de l'historique de conversation présent dans votre propre application WhatsApp se fait directement depuis celle-ci.</p>
+  </section>
+
+  <section class="card" id="securite">
+    <h2>9. Sécurité</h2>
+    <p>Des mesures techniques et organisationnelles adaptées au pilote sont mises en œuvre : accès aux outils restreint au responsable du traitement, connexions chiffrées (HTTPS/TLS) entre les services, clés d'accès techniques non divulguées publiquement. Aucun système n'étant totalement infaillible, toute violation de données présentant un risque pour vos droits sera traitée conformément aux articles 33 et 34 du RGPD.</p>
+  </section>
+
+  <section class="card" id="site">
+    <h2>10. Cette page web</h2>
+    <p>Cette page n'utilise ni cookie, ni outil de mesure d'audience, ni ressource externe. Elle est hébergée par GitHub Pages (GitHub, Inc.), qui peut enregistrer des données techniques de connexion, telles que l'adresse IP, pour assurer la sécurité et le fonctionnement du service, conformément à la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">déclaration de confidentialité de GitHub</a>.</p>
+  </section>
+
+  <section class="card" id="modifications">
+    <h2>11. Modifications</h2>
+    <p>Cette politique peut être mise à jour, notamment à l'issue de la phase pilote ou lors de la fixation des durées de conservation. La date de version figurant en haut de page indique la dernière mise à jour. En cas de modification substantielle, les participants au pilote en sont informés.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>ServiceFlow Pilote — Politique de confidentialité, version 1.0 du 19 octobre 2026.<br>
+    Contact : <a href="mailto:anasmbarki.amk@gmail.com">anasmbarki.amk@gmail.com</a></p>
+  </div>
+</footer>
+</body>
+</html>
