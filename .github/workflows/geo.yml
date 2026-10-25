@@ -1,0 +1,26 @@
+name: Donnees cartographiques Paris
+# Recupere les couches (grands axes IGN, Seine, lignes et gares IDFM, arrondissements) preparees dans Supabase
+# et les depose dans data/paris-geo.json. Declenche en modifiant data/geo.demande.
+on:
+  push:
+    paths: ['data/geo.demande']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  geo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Telecharger les couches
+        run: |
+          curl -sS -f -X POST 'https://tvlsaowmsfnedlxnuvbw.supabase.co/rest/v1/rpc/sf_geo_layers' \
+            -H 'apikey: sb_publishable_vI3BqhRtcD77pNth0_4nNA_T_6Lizbc' -H 'Content-Type: application/json' -d '{}' -o data/paris-geo.json
+          python3 -c "import json;d=json.load(open('data/paris-geo.json'));print({k: len(v['features']) for k, v in d['layers'].items()})"
+      - name: Enregistrer
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/paris-geo.json
+          git commit -m 'Couches cartographiques Paris mises a jour' || echo 'Rien a changer'
+          git push
