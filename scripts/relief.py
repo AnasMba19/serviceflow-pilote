@@ -5,7 +5,7 @@ import io, json, math, urllib.request
 import numpy as np
 from PIL import Image
 
-Z = 13
+Z = 12
 LON = (2.19, 2.47)
 LAT = (48.78, 48.93)
 URL = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'
@@ -35,12 +35,12 @@ def blur(a, sigma):
     p = np.pad(a, r, mode='edge')
     p = np.apply_along_axis(lambda v: np.convolve(v, k, mode='valid'), 1, p)
     return np.apply_along_axis(lambda v: np.convolve(v, k, mode='valid'), 0, p)
-elev = blur(elev, 6.0)
+elev = blur(elev, 4.0)
 
 # Taille d'un pixel au sol (metres) a la latitude moyenne, puis ombrage classique (soleil au nord-ouest, 45 degres).
 lat_mid = math.radians((LAT[0] + LAT[1]) / 2)
 px = 40075016.686 * math.cos(lat_mid) / (2 ** Z * 256)
-exag = 7.0
+exag = 6.0
 dzdy, dzdx = np.gradient(elev * exag, px)
 slope = np.arctan(np.hypot(dzdx, dzdy))
 aspect = np.arctan2(-dzdx, dzdy)
@@ -52,9 +52,8 @@ dark = np.clip((flat - shade) / flat, 0, 1)          # versants a l'ombre
 light = np.clip((shade - flat) / (1 - flat), 0, 1)   # versants au soleil
 rgba = np.zeros(elev.shape + (4,), dtype=np.uint8)
 rgba[..., 0:3] = np.where(light[..., None] > dark[..., None], 255, 0)
-rgba[..., 3] = (np.maximum(dark * 200, light * 90)).astype(np.uint8)
+rgba[..., 3] = (np.maximum(np.clip(dark * 1.3, 0, 1) * 170, light * 45)).astype(np.uint8)
 img = Image.fromarray(rgba, 'RGBA')
-img = img.resize((img.width // 2, img.height // 2), Image.LANCZOS)
 img.save('data/relief.webp', 'WEBP', quality=55, alpha_quality=45, method=6)
 
 west, east = lon_of(x0), lon_of(x1 + 1)
