@@ -53,7 +53,9 @@ for code, lng, lat in imm:
         # Immeuble Gecina : la plus grande emprise a moins de 35 m du point de l'adresse (bureaux = grands volumes).
         # La cuisine est un restaurant en pied d'immeuble : le batiment qui contient l'adresse (ou le plus proche).
         if d <= 35:
-            score = -d if code == 'CUISINE' else proj(g).area
+            area = proj(g).area
+            # Cuisine : le batiment le plus proche du point de l'adresse, en ignorant les petites annexes (< 40 m2).
+            score = (-d if area >= 40 else -1000 - d) if code == 'CUISINE' else area
             if best is None or score > best[0]:
                 best = (score, cle, p.get('identifiants_rnb'), p.get('hauteur'))
     if best:
