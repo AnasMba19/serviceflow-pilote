@@ -3,6 +3,7 @@ name: Donnees cartographiques Paris
 # et les depose dans data/paris-geo.json ; calcule aussi l'ombrage du relief (data/relief.webp). Declenche en modifiant data/geo.demande.
 on:
   push:
+    branches: [main]
     paths: ['data/geo.demande']
   workflow_dispatch:
 permissions:
