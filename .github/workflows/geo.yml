@@ -1,6 +1,6 @@
 name: Donnees cartographiques Paris
 # Recupere les couches (grands axes IGN, Seine, lignes et gares IDFM, arrondissements) preparees dans Supabase
-# et les depose dans data/paris-geo.json. Declenche en modifiant data/geo.demande.
+# et les depose dans data/paris-geo.json ; calcule aussi l'ombrage du relief (data/relief.webp). Declenche en modifiant data/geo.demande.
 on:
   push:
     paths: ['data/geo.demande']
@@ -17,10 +17,16 @@ jobs:
           curl -sS -f -X POST 'https://tvlsaowmsfnedlxnuvbw.supabase.co/rest/v1/rpc/sf_geo_layers' \
             -H 'apikey: sb_publishable_vI3BqhRtcD77pNth0_4nNA_T_6Lizbc' -H 'Content-Type: application/json' -d '{}' -o data/paris-geo.json
           python3 -c "import json;d=json.load(open('data/paris-geo.json'));print({k: len(v['features']) for k, v in d['layers'].items()})"
+      - name: Relief (Terrain Tiles AWS Open Data)
+        run: |
+          pip install --quiet numpy pillow shapely
+          python3 scripts/relief.py
+      - name: Abords des immeubles (IGN BD TOPO, WFS Geoplateforme)
+        run: python3 scripts/quartiers.py
       - name: Enregistrer
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data/paris-geo.json
+          git add data/paris-geo.json data/relief.webp data/relief.json data/quartiers.json
           git commit -m 'Couches cartographiques Paris mises a jour' || echo 'Rien a changer'
           git push
