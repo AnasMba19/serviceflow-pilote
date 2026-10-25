@@ -46,8 +46,11 @@ for code, lng, lat in imm:
         cle = p['cleabs']
         if cle not in bati:
             bati[cle] = {'g': g.simplify(0.000004, preserve_topology=True), 'h': round(p.get('hauteur') or 12)}
-        if d <= 30 and (best is None or (d, -(p.get('hauteur') or 0)) < best[0]):
-            best = ((d, -(p.get('hauteur') or 0)), cle, p.get('identifiants_rnb'), p.get('hauteur'))
+        # Immeuble Gecina : la plus grande emprise a moins de 35 m du point de l'adresse (bureaux = grands volumes).
+        if d <= 35:
+            area = proj(g).area
+            if best is None or area > best[0]:
+                best = (area, cle, p.get('identifiants_rnb'), p.get('hauteur'))
     if best:
         bati[best[1]]['code'] = code
         rnb[code] = {'rnb': best[2], 'hauteur': best[3]}

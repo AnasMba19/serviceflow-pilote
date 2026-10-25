@@ -29,10 +29,18 @@ for y in range(y0, y1 + 1):
     rows.append(np.hstack(row))
 elev = np.vstack(rows)
 
+# Lissage gaussien (le modele numerique contient du bruit urbain) : on garde les collines, pas les toits.
+def blur(a, sigma):
+    r = int(3 * sigma); k = np.exp(-0.5 * (np.arange(-r, r + 1) / sigma) ** 2); k /= k.sum()
+    p = np.pad(a, r, mode='edge')
+    p = np.apply_along_axis(lambda v: np.convolve(v, k, mode='valid'), 1, p)
+    return np.apply_along_axis(lambda v: np.convolve(v, k, mode='valid'), 0, p)
+elev = blur(elev, 3.0)
+
 # Taille d'un pixel au sol (metres) a la latitude moyenne, puis ombrage classique (soleil au nord-ouest, 45 degres).
 lat_mid = math.radians((LAT[0] + LAT[1]) / 2)
 px = 40075016.686 * math.cos(lat_mid) / (2 ** Z * 256)
-exag = 6.0
+exag = 5.0
 dzdy, dzdx = np.gradient(elev * exag, px)
 slope = np.arctan(np.hypot(dzdx, dzdy))
 aspect = np.arctan2(-dzdx, dzdy)
@@ -45,7 +53,9 @@ light = np.clip((shade - flat) / (1 - flat), 0, 1)   # versants au soleil
 rgba = np.zeros(elev.shape + (4,), dtype=np.uint8)
 rgba[..., 0:3] = np.where(light[..., None] > dark[..., None], 255, 0)
 rgba[..., 3] = (np.maximum(dark * 200, light * 90)).astype(np.uint8)
-Image.fromarray(rgba, 'RGBA').save('data/relief.webp', 'WEBP', quality=72, method=6)
+img = Image.fromarray(rgba, 'RGBA')
+img = img.resize((img.width // 2, img.height // 2), Image.LANCZOS)
+img.save('data/relief.webp', 'WEBP', quality=55, alpha_quality=45, method=6)
 
 west, east = lon_of(x0), lon_of(x1 + 1)
 north, south = lat_of(y0), lat_of(y1 + 1)
