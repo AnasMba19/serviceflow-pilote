@@ -35,12 +35,12 @@ def blur(a, sigma):
     p = np.pad(a, r, mode='edge')
     p = np.apply_along_axis(lambda v: np.convolve(v, k, mode='valid'), 1, p)
     return np.apply_along_axis(lambda v: np.convolve(v, k, mode='valid'), 0, p)
-elev = blur(elev, 3.0)
+elev = blur(elev, 6.0)
 
 # Taille d'un pixel au sol (metres) a la latitude moyenne, puis ombrage classique (soleil au nord-ouest, 45 degres).
 lat_mid = math.radians((LAT[0] + LAT[1]) / 2)
 px = 40075016.686 * math.cos(lat_mid) / (2 ** Z * 256)
-exag = 5.0
+exag = 7.0
 dzdy, dzdx = np.gradient(elev * exag, px)
 slope = np.arctan(np.hypot(dzdx, dzdy))
 aspect = np.arctan2(-dzdx, dzdy)
