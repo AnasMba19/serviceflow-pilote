@@ -10,6 +10,10 @@ from shapely.geometry import shape, mapping, Point
 WFS = 'https://data.geopf.fr/wfs/ows'
 geo = json.load(open('data/paris-geo.json'))
 imm = [(f['properties']['code'], *f['geometry']['coordinates']) for f in geo['layers']['immeubles']['features']]
+# Cuisine du chef : meme traitement (emprise exacte en 3D, batiments et rues autour), sous le code CUISINE.
+for f in (geo['layers'].get('livraison') or {}).get('features', []):
+    if f['properties'].get('kind') == 'cuisine':
+        imm.append(('CUISINE', *f['geometry']['coordinates']))
 
 def fetch(typ, lat, lng, dx, dy):
     feats, start = [], 0
@@ -47,10 +51,11 @@ for code, lng, lat in imm:
         if cle not in bati:
             bati[cle] = {'g': g.simplify(0.000004, preserve_topology=True), 'h': round(p.get('hauteur') or 12)}
         # Immeuble Gecina : la plus grande emprise a moins de 35 m du point de l'adresse (bureaux = grands volumes).
+        # La cuisine est un restaurant en pied d'immeuble : le batiment qui contient l'adresse (ou le plus proche).
         if d <= 35:
-            area = proj(g).area
-            if best is None or area > best[0]:
-                best = (area, cle, p.get('identifiants_rnb'), p.get('hauteur'))
+            score = -d if code == 'CUISINE' else proj(g).area
+            if best is None or score > best[0]:
+                best = (score, cle, p.get('identifiants_rnb'), p.get('hauteur'))
     if best:
         bati[best[1]]['code'] = code
         rnb[code] = {'rnb': best[2], 'hauteur': best[3]}
