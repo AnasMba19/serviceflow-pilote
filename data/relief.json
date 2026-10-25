@@ -1,9 +1,9 @@
 {
  "source": "Terrain Tiles, AWS Open Data (Mapzen ; SRTM, EU-DEM et autres sources publiques)",
  "zoom": 13,
- "exageration": 5.0,
- "altitude_min": 20.9,
- "altitude_max": 187.5,
+ "exageration": 7.0,
+ "altitude_min": 21.0,
+ "altitude_max": 186.5,
  "coordinates": [
   [
    2.1533203125,
